@@ -53,8 +53,9 @@ namespace camera {
               }
 
               // set to software trigger mode
+              std::cout<<"HELLOW I AM A HERE \n";
               if((rv = MV_CC_SetEnumValue(handle_, "TriggerMode", 0)) == MV_OK) {
-                // retrieve payload size
+                // retrieve payload scn
                 if((rv = MV_CC_GetIntValue(handle_, "PayloadSize", &param_)) == MV_OK) {
                   // enable "image grabbing"
                   if((rv = MV_CC_StartGrabbing(handle_)) == MV_OK) {
@@ -95,7 +96,7 @@ namespace camera {
 
       MV_SAVE_IMAGE_PARAM_EX save_param;
       memset(&save_param, 0, sizeof(MV_SAVE_IMAGE_PARAM_EX));
-
+      
       save_param.enImageType = MV_Image_Jpeg; 
       save_param.enPixelType = image_info.enPixelType; 
       save_param.nBufferSize = image_info.nWidth * image_info.nHeight * 4 + 2048;
@@ -105,11 +106,11 @@ namespace camera {
       save_param.nDataLen    = image_info.nFrameLen;
       save_param.pImageBuffer = image.data();
       save_param.nJpgQuality = 80;
-
+      std::cout<<"HELLOW I AM A HERE -- Capture \n";
       // pull image from frame
       if((rv = MV_CC_SaveImageEx2(handle_, &save_param)) == MV_OK) {        
         auto cv_image = cv::imdecode(image, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH);
-        cv::cvtColor(cv_image, cv_image, cv::COLOR_GRAY2BGR);
+        // cv::cvtColor(cv_image, cv_image, cv::COLOR_GRAY2BGR);
         return cv_image;
       } else { std::cerr << "could not convert frame to bmp: " << rv << std::endl; }
     } else { std::cerr << "could not capture frame: " << rv << std::endl; }

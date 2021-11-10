@@ -4,7 +4,7 @@
 #include <opencv2/core.hpp>
 #include </opt/MVS/include/MvCameraControl.h>
 #include "camera_interface.hpp"
-// #include "MvCameraControl.h"
+#include "MvCameraControl.h"
 
 #include <mutex>
 #include <atomic>
