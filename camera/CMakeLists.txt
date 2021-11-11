@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 
 project(camera)
 list(APPEND CMAKE_PREFIX_PATH "/opt/MVS/lib/64/" "/opt/MVS/lib/aarch64/")

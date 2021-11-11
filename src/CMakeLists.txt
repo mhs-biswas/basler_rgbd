@@ -14,6 +14,24 @@ set(_SRCS
 #     # tcp_client.hpp
 # )
 
+
+#=============================================
+
+set(BaslerBlaze_ROOT_DIR "/opt/Basler_blaze")
+set(module_path ${BaslerBlaze_ROOT_DIR}/lib/cmake)
+list(APPEND CMAKE_MODULE_PATH ${module_path})
+unset(module_path)
+
+find_package(BaslerBlaze REQUIRED)
+
+# add_executable(Sample test.cpp)
+# target_link_libraries(FirstSample BaslerBlaze::BaslerBlazeSDK)
+
+
+#=============================================
+
+
+
 find_library(CAMERA_LIB MvCameraControl REQUIRED)
 find_package(OpenCV REQUIRED)
 
@@ -29,6 +47,7 @@ target_include_directories(${PROJECT_NAME}
     /opt/MVS/include
     # ${CMAKE_SOURCE_DIR}/YoloNet
     ${CMAKE_SOURCE_DIR}/camera
+    # ${CMAKE_SOURCE_DIR}/ToF_camera
     )
 
 target_link_libraries(${PROJECT_NAME}
@@ -37,5 +56,7 @@ target_link_libraries(${PROJECT_NAME}
     pthread
     ${OpenCV_LIBS}
     camera
+    BaslerBlaze::BaslerBlazeSDK
+    # ToF_camera
     # YoloNet    
 )
